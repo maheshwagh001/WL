@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Table Generator W7</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    label {
+      display: inline;
+      margin-bottom: 5px;
+    }
+    input {
+      width: 200px; /* Adjust width as needed */
+      margin: 20px;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    .input-container {
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .table-container {
+      display: inline-block;
+      text-align: center;
+      margin-top: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      /* width: 60%; */
+    }
+    td {
+      border: 2px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="input-container">
+    <label for="input1"><b>Enter Table 1 Dimensions (Rows#Columns)&nbsp; :</b></label>
+    <input type="text" id="input1" required/>
+    <label for="input2"><b>Enter Table 2 Dimensions (Rows#Columns)&nbsp; :</b></label>
+    <input type="text" id="input2" required/>
+  </div>
+  <div>
+    <button onclick="generateTables()">Generate Tables</button>
+  </div>
+
+  <div id="tablesContainer" class="table-container"></div>
+
+  <script>
+    function generateTables() {
+      const input1 = document.getElementById("input1").value;
+      const input2 = document.getElementById("input2").value;
+      const [rows1, cols1, value1] = input1.split("#").map(Number);
+      const [rows2, cols2, value2] = input2.split("#").map(Number);
+      if (rows1 === rows2 && cols1 === cols2) {
+        const table1 = generateTable(rows1, cols1, value1);
+        const table2 = generateTable(rows2, cols2, value2);
+        const table3 = generateThirdTable(rows1, cols1, value1, value2);
+
+        const tablesContainer = document.getElementById("tablesContainer");
+        tablesContainer.innerHTML = ""; // Clear previous tables
+        tablesContainer.appendChild(table1);
+        tablesContainer.appendChild(table2);
+        tablesContainer.appendChild(table3);
+      } else {
+        alert("Dimensions of the tables are not the same.");
+      }
+    }
+
+    function generateTable(rows, cols, value) {
+      const table = document.createElement("table");
+      for (let i = 0; i < rows; i++) {
+        const row = table.insertRow();
+        for (let j = 0; j < cols; j++) {
+          const cell = row.insertCell();
+          const num = (i + 1) * (value + j);
+          cell.textContent = num;
+        }
+      }
+      return table;
+    }
+
+    function generateThirdTable(rows, cols, value1, value2) {
+      const table = document.createElement("table");
+      for (let i = 0; i < rows; i++) {
+        const row = table.insertRow();
+        for (let j = 0; j < cols; j++) {
+          const cell = row.insertCell();
+          if ((i + 1) * (value1 + j) === (i + 1) * (value2 + j)) {
+            const num = (i + 1) * (value1 + j);
+            cell.textContent = num;
+          } else {
+            const num = (i + 1) * (value1 + j) * (i + 1) * (value2 + j);
+            cell.textContent = num;
+          }
+        }
+      }
+      return table;
+    }
+  </script>
+</body>
+</html>
