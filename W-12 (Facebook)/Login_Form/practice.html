@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f7dadf;
+        }
+        table {
+            border-collapse: separate;
+            border: 2px solid #aaa;
+            margin: 10% auto;
+        }
+        th, td {
+            border: 2px solid #aaa;
+            background-color: rgb(103, 205, 220);
+            /* padding: 0 5px; */
+        }
+        th {
+            background-color: #eada52;
+            font-size: 25px;
+            color: red;
+        }
+        #uploadFile {
+            padding-left: 20px;
+        }
+        button {
+            padding: 8px 5px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <form border="2px">
+            <tr>
+                <th colspan="2">User Form</th>
+            </tr>
+
+            <tr>
+                <td>Enter Name</td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td>Enter Password</td>
+                <td><input type="password"></td>
+            </tr>
+            <tr>
+                <td>Enter Address</td>
+                <td><textarea name="textArea" cols="20" rows="4"></textarea></td>
+            </tr>
+            <tr>
+                <td>Select Games</td>
+                <td>
+                    <input type="checkbox"> Hockey<br>
+                    <input type="checkbox"> Football<br>
+                    <input type="checkbox"> Badminton<br>
+                    <input type="checkbox"> Cricket<br>
+                    <input type="checkbox"> Volleyball
+                </td>
+            </tr>
+            <tr>
+                <td>Select Gender</td>
+                <td>
+                    <input type="radio" name="gender"> Male
+                    <input type="radio" name="gender"> Female
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <input type="file" id="uploadFile">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <button>Click Me</button>
+                    <button type="reset">Reset</button>
+                    <button type="submit">Submit Form</button>
+                </td>
+            </tr>
+        </form>
+    </table>
+</body>
+</html>
