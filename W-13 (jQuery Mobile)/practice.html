@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Website</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .navbar {
+            background-color: #25a729;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+        }
+        .navbar a {
+            float: left;
+            color: #fff;
+            padding: 12px 24px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: #333;
+        }
+        
+        .page {
+            padding-top: 40px;
+        }
+
+        .page-header {
+            padding: 40px 0 3px 0;
+            background-color: #6af66f;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        
+        .page-content {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            width: 45%;
+        }
+
+        .all-content {
+            height: 330px;
+            overflow-y: auto;
+            scrollbar-width: none;
+        }
+
+        .page-footer {
+            background-color: #6af66f;
+            padding: 10px;
+            bottom: 0;
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <div data-role="page" id="home">
+        <div class="page-header">
+            <h1>Welcome to Our Website</h1>
+        </div>
+
+        <div class="all-content">
+            <div class="page-content">
+                <button id="showCollegeBtn">About Our College</button>
+                <div id="collegeContainer" style="display: none;">
+                    <h2>About PICT</h2>
+                    <div><a href="https://pict.edu/">Go to PICT Website</a></div>
+                </div>
+            </div>
+            
+            <div class="page-content">
+                <button id="showDeptBtn">About Our Departments</button>
+                <div id="deptContainer" style="display: none;">
+                    <h2>Our Departments</h2>
+                    <ul id="deptList" style="text-align: left;"></ul>
+                </div>
+            </div>
+
+            <div class="page-content">
+                <button id="showClubsBtn">About Our Clubs</button>
+                <div id="clubsContainer" style="display: none;">
+                    <h2>Our Clubs</h2>
+                    <ul id="clubList" style="text-align: left;"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer" id="homeFooter">
+            <h4>Contact Us: example@example.com</h4>
+        </div>
+    </div>
+
+    <div data-role="page" id="about">
+        <div class="page-header">
+            <h1>About Website</h1>
+        </div>
+
+        <div class="page-content">
+            <p>Our Website provides the information about various departments and clubs under the Pune Institute of Computer Technology College.</p>
+        </div>
+
+        <div class="page-footer" id="aboutFooter">
+            <h4>Contact Us: example@example.com</h4>
+        </div>
+    </div>
+
+    <div data-role="page" id="contact">
+        <div class="page-header">
+            <h1>Contact Us</h1>
+        </div>
+
+        <div class="page-content">
+            <p>If you have any queries or if you want to give feedback you can contact us on example@example.com or you can call us on +916283682678.</p>
+        </div>
+        
+        <div class="page-footer" id="contactFooter">
+            <h4>Contact Us: example@example.com</h4>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#showCollegeBtn").click(function() {
+                $("#collegeContainer").toggle();
+            });
+
+            $("#showDeptBtn").click(function() {
+                $("#deptContainer").toggle();
+
+                if($("#deptContainer").is(":visible")) {
+                    var depts = [
+                        { name: "Computer Engineering", link: "https://pictce.edu/"},
+                        { name: "Information Technology", link: "https://pictce.edu/"},
+                        { name: "Electronics & Telecommunication", link: "https://pictce.edu/"}
+                    ];
+
+                    $("#deptList").empty();
+                    $.each(depts, function(index, dept) {
+                        $("#deptList").append('<li><a href="' + dept.link + '">' + dept.name + '</a></li>');
+                    });
+                }
+            });
+
+            $("#showClubsBtn").click(function() {
+                $("#clubsContainer").toggle();
+
+                if($("#clubsContainer").is(":visible")) {
+                    var clubs = [
+                        { name: "PICT ACM Student Chapter", link: "https://pict.edu/" },
+                        { name: "PICT IEEE Student Branch", link: "https://pict.edu/" },
+                        { name: "PICT EDC Club", link: "https://pict.edu/" },
+                        { name: "PICT Robocon", link: "https://pict.edu/" }
+                    ];
+
+                    $("#clubList").empty();
+                    $.each(clubs, function(index, club) {
+                        $("#clubList").append('<li><a href="' + club.link + '">' + club.name + '</a></li>')
+                    });
+                }
+            });
+
+            $("#homeFooter").on("swiperight", function() {
+                $.mobile.changePage("#about", {transition: "slide"});
+            });
+            $("#aboutFooter").on("swiperight", function() {
+                $.mobile.changePage("#contact", {transition: "slide"});
+            });
+            $("#contactFooter").on("swiperight", function() {
+                $.mobile.changePage("#home", {transition: "slide"});
+            });
+            $(document).on("swipeleft", function() {
+                $.mobile.changePage("#home", {transition: "slide"});
+            });
+        });
+    </script>
+</body>
+</html>
